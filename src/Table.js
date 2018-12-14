@@ -4,6 +4,7 @@ import "react-table/react-table.css";
 
 import people from "./people.json";
 
+import './Table.css';
 
 class Table extends React.Component {
   constructor() {
