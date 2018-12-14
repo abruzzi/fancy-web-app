@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components';
 
+import Simple from './Simple';
+import TreeMap from './TreeMap';
+import Table from './Table';
+
 class App extends Component {
   render() {
     return (
@@ -15,27 +19,41 @@ class App extends Component {
           </div>
         </ReportHeader>
         <FlexBox>
-          <section className="square">
+          <section className="fixed">
             <h3>20.5%</h3>
             <p>Interest Rate</p>
           </section>
 
-          <section className="square">
+          <section className="fixed">
             <h3>20.5%</h3>
             <p>Interest Rate</p>
           </section>
 
-          <section className="square">
+          <section className="fixed">
             <h3>20.5%</h3>
             <p>Interest Rate</p>
           </section>
 
-          <section className="square">
+          <section className="fixed">
             <h3>20.5%</h3>
             <p>Interest Rate</p>
           </section>
         </FlexBox>
 
+        <FlexBox>
+          <section className="flex">
+            <TreeMap />
+          </section>
+          <section className="flex">
+            <Simple/>
+          </section>
+        </FlexBox>
+
+        <FlexBox>
+          <section className="flex">
+            <Table />
+          </section>
+        </FlexBox>
       </ReportContainer>
     );
   }
@@ -43,7 +61,8 @@ class App extends Component {
 
 const ReportContainer = styled.div`
   width: 1000px;
-  margin: 0 auto;
+  margin: 20px auto;
+  border: 1px solid #f2f4f6;
 `;
 
 const ReportHeader = styled.header`
@@ -74,7 +93,7 @@ const FlexBox = styled.div`
   justify-content: space-between;
   margin: 10px 0;
   
-  section {
+  section.fixed {
     width: 240px;
     background-color: #b51a2c;
     color: white;
@@ -88,6 +107,10 @@ const FlexBox = styled.div`
     p {
       text-align: center;
     }
+  }
+  
+  section.flex {
+    flex: 1;
   }
 `;
 
