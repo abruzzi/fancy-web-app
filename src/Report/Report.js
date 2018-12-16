@@ -9,7 +9,7 @@ import ScatterChart from "./ScatterChart";
 class Report extends Component {
   render() {
     return (
-      <ReportContainer>
+      <div>
         <ReportHeader>
           <div className="heading">
             Fancy Report
@@ -58,20 +58,10 @@ class Report extends Component {
             <Table />
           </section>
         </FlexBox>
-      </ReportContainer>
+      </div>
     );
   }
 }
-
-const ReportContainer = styled.div`
-  width: 1000px;
-  margin: 20px auto;
-  box-shadow: 0 0 5px #f2f4f6;
-  
-  @media print {
-    margin: 0 auto;
-  }
-`;
 
 const ReportHeader = styled.header`
   display: flex;

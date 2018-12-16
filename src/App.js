@@ -6,18 +6,32 @@ import jsPDF from 'jspdf';
 
 import Report from './Report/Report';
 
+const A4_WIDTH = 794;
+const A4_HEIGHT = 1123;
+
+const resizeImage = (image) => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = A4_WIDTH;
+  canvas.height = A4_HEIGHT;
+
+  ctx.drawImage(image, 0, 0, A4_WIDTH, A4_HEIGHT);
+
+  return canvas.toDataURL('image/png');
+}
+
 class App extends Component {
   exportReport = (e) => {
     e.preventDefault();
     const report = document.querySelector('#report-container');
 
     html2canvas(report).then((canvas) => {
-      const image = canvas.toDataURL('image/png');
-      console.log(image);
-
       const pdf = new jsPDF('p', 'mm', 'a4');
 
-      pdf.addImage(image, 'png', 0, 0);
+      const resized = resizeImage(canvas);
+
+      pdf.addImage(resized, 'png', 0, 0);
       pdf.save('report.pdf');
     });
   }
@@ -32,13 +46,25 @@ class App extends Component {
           </div>
         </Header>
 
-        <div id="report-container">
-          <Report />
-        </div>
+        <ReportBox>
+          <div id="report-container">
+            <Report />
+          </div>
+        </ReportBox>
       </Page>
     );
   }
 }
+
+const ReportBox = styled.div`
+  width: 1000px;
+  margin: 20px auto;
+  box-shadow: 0 0 5px #f2f4f6;
+  
+  @media print {
+    margin: 0 auto;
+  }
+`;
 
 const Header = styled.div`
   background-color: #323232;
