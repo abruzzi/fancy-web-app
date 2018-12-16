@@ -45,6 +45,12 @@ class App extends Component {
     });
   }
 
+  exportReportBackend = (e) => {
+    e.preventDefault();
+
+    window.open('http://localhost:4000/printing', '_blank');
+  }
+
   render() {
     return (
       <Page>
@@ -52,6 +58,7 @@ class App extends Component {
           <div>
             <h1>Sales <span>Force</span></h1>
             <a href="#" onClick={this.exportReport}>Export to PDF</a>
+            <a href="#" onClick={this.exportReportBackend}>Export to PDF by backend</a>
           </div>
         </Header>
 

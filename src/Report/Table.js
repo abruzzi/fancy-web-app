@@ -69,6 +69,8 @@ class Table extends React.Component {
 }
 
 const TableContainer = styled.div`
+  page-break-inside: avoid;
+  
   h3 {
     color: #333333;
     text-align: center;
