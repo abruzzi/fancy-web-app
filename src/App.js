@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components';
 
-import Report from './Report';
+import Report from './Report/Report';
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
       <Page>
         <Header>
           <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti quos recusandae sed sit! Accusamus adipisci corporis dolorem doloremque dolores doloribus, ducimus est fugiat labore laborum molestiae, numquam repudiandae sed voluptas?
+            <h1>Sales <span>Force</span></h1>
           </div>
         </Header>
         <Report />
@@ -20,13 +20,27 @@ class App extends Component {
 }
 
 const Header = styled.div`
-  background-color: #222;
+  background-color: #323232;
   color: whitesmoke;
+  
+  @media print {
+    display: none;
+  }
   
   div {
     width: 1000px;
     margin: 0 auto;
     padding: 20px 0;
+    
+    h1 {
+    font-size: 32px;
+    padding: 0;
+    margin: 0;
+    
+      span {
+        font-style: italic;
+      }
+    }
   }
 `;
 

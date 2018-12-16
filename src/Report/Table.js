@@ -2,6 +2,8 @@ import React from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
+import styled from 'styled-components';
+
 import people from "./people.json";
 
 import './Table.css';
@@ -16,7 +18,8 @@ class Table extends React.Component {
   render() {
     const { data } = this.state;
     return (
-      <div>
+      <TableContainer>
+        <h3>Some meaningless table</h3>
         <ReactTable
           data={data}
           columns={[
@@ -60,10 +63,16 @@ class Table extends React.Component {
           showPagination={false}
           className="-striped -highlight"
         />
-      </div>
+      </TableContainer>
     );
   }
 }
 
+const TableContainer = styled.div`
+  h3 {
+    color: #333333;
+    text-align: center;
+  }
+`;
 
 export default Table;

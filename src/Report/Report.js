@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import Table from './Table';
-import TreeMap from "./TreeMap";
-import Simple from "./Simple";
+import LineChart from "./LineChart";
+import ScatterChart from "./ScatterChart";
 
 class Report extends Component {
   render() {
@@ -43,13 +43,13 @@ class Report extends Component {
 
         <FlexBox>
           <section className="flex">
-            <Simple/>
+            <LineChart/>
           </section>
         </FlexBox>
 
         <FlexBox>
           <section className="flex">
-            <TreeMap/>
+            <ScatterChart/>
           </section>
         </FlexBox>
 
@@ -67,6 +67,10 @@ const ReportContainer = styled.div`
   width: 1000px;
   margin: 20px auto;
   box-shadow: 0 0 5px #f2f4f6;
+  
+  @media print {
+    margin: 0 auto;
+  }
 `;
 
 const ReportHeader = styled.header`
