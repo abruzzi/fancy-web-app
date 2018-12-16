@@ -1,19 +1,40 @@
 import React, { Component } from 'react';
 
 import styled from 'styled-components';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 import Report from './Report/Report';
 
 class App extends Component {
+  exportReport = (e) => {
+    e.preventDefault();
+    const report = document.querySelector('#report-container');
+
+    html2canvas(report).then((canvas) => {
+      const image = canvas.toDataURL('image/png');
+      console.log(image);
+
+      const pdf = new jsPDF('p', 'mm', 'a4');
+
+      pdf.addImage(image, 'png', 0, 0);
+      pdf.save('report.pdf');
+    });
+  }
+
   render() {
     return (
       <Page>
         <Header>
           <div>
             <h1>Sales <span>Force</span></h1>
+            <a href="#" onClick={this.exportReport}>Export to PDF</a>
           </div>
         </Header>
-        <Report />
+
+        <div id="report-container">
+          <Report />
+        </div>
       </Page>
     );
   }
@@ -40,6 +61,10 @@ const Header = styled.div`
       span {
         font-style: italic;
       }
+    }
+    
+    a {
+      color: deeppink;
     }
   }
 `;
