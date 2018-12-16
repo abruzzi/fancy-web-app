@@ -6,20 +6,23 @@ import jsPDF from 'jspdf';
 
 import Report from './Report/Report';
 
-const A4_WIDTH = 794;
-const A4_HEIGHT = 1123;
+const A4_WIDTH_PX = 794;
+const A4_HEIGHT_PX = 1123;
+
+const A4_WIDTH_IN = 8.3;
+const A4_HEIGHT_IN = 11.7;
 
 const resizeImage = (image) => {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
 
-  const ratio = image.width / A4_WIDTH;
-  canvas.width = A4_WIDTH;
+  const ratio = image.width / A4_WIDTH_PX;
+  canvas.width = A4_WIDTH_PX;
   canvas.height = image.height / ratio;
 
   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-  return canvas.toDataURL('image/png');
+  return canvas;
 }
 
 class App extends Component {
@@ -27,12 +30,17 @@ class App extends Component {
     e.preventDefault();
     const report = document.querySelector('#report-container');
 
-    html2canvas(report).then((canvas) => {
-      const pdf = new jsPDF('p', 'mm', 'a4');
+    html2canvas(report, {logging: false}).then((canvas) => {
+      const pdf = new jsPDF('p', 'in', 'a4');
 
       const resized = resizeImage(canvas);
+      const imageData = resized.toDataURL('image/png');
 
-      pdf.addImage(resized, 'png', 0, 0);
+      for(var i = 0; i < resized.height / A4_HEIGHT_PX; i++) {
+        pdf.addImage(imageData, 'png', 0, -(i * A4_HEIGHT_IN));
+        pdf.addPage();
+      }
+
       pdf.save('report.pdf');
     });
   }
