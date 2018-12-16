@@ -13,10 +13,11 @@ const resizeImage = (image) => {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
 
+  const ratio = image.width / A4_WIDTH;
   canvas.width = A4_WIDTH;
-  canvas.height = A4_HEIGHT;
+  canvas.height = image.height / ratio;
 
-  ctx.drawImage(image, 0, 0, A4_WIDTH, A4_HEIGHT);
+  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
   return canvas.toDataURL('image/png');
 }
